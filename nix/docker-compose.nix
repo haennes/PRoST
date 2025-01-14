@@ -3,7 +3,7 @@ self:
 { pkgs, lib, config, ... }:
 let cfg = config.services.prost;
 in {
-  config = {
+  config = lib.mkIf cfg.enable {
     # Runtime
     virtualisation.docker = {
       enable = true;
