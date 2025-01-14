@@ -1,4 +1,4 @@
-{ lib, self, ... }:
+self: { lib, ... }:
 let
   inherit (lib) mkEnableOption mkOption;
   inherit (lib.types) str port package;
