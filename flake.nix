@@ -10,7 +10,7 @@
 
     in {
 
-      packages.x86_64-linux = {
+      packages.x86_64-linux = cfg: {
         frontend = let
           inherit (pkgs) importNpmLock;
           pname = "frontend"; # <same as package.json name>
@@ -25,8 +25,8 @@
           src = ./frontend;
           npmDeps = importNpmLock { npmRoot = ./frontend; };
 
-          VITE_API_URL = "http://localhost:8081";
-          VITE_BASE_PATH = "/prost";
+          VITE_API_URL = cfg.api_domain;
+          VITE_BASE_PATH = cfg.vite_base_path;
 
           npmConfigHook = importNpmLock.npmConfigHook;
           installPhase = ''

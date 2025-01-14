@@ -1,7 +1,8 @@
-self: { lib, ... }:
+self: { config, lib, ... }:
 let
   inherit (lib) mkEnableOption mkOption;
   inherit (lib.types) str port package;
+  cfg = config.services.prost;
 in {
 
   options.services.prost = {
@@ -10,8 +11,16 @@ in {
       type = port;
       default = 80;
     };
-    frontend.package = mkOption { type = package; default = self.packages.x86_64-linux.frontend; };
+    frontend.package = mkOption { type = package; default = self.packages.x86_64-linux.frontend cfg; };
     #TODO: when building from source also allow basepath
+    api_domain = mkOption {
+       type = str;
+       default = "http://localhost:8081";
+    };
+    vite_base_path = mkOption {
+       type = str;
+       default = "/prost";
+    };
     ldapUri = mkOption {
       type = str;
       default = "ldap://ldap:1389/dc=fsinfo,dc=fim,dc=uni-passau,dc=de";
