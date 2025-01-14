@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, self, ... }:
 let
   inherit (lib) mkEnableOption mkOption;
   inherit (lib.types) str port package;
@@ -10,7 +10,7 @@ in {
       type = port;
       default = 80;
     };
-    frontend.package = mkOption { type = package; };
+    frontend.package = mkOption { type = package; default = self.packages.x86_64-linux.frontend; };
     #TODO: when building from source also allow basepath
     ldapUri = mkOption {
       type = str;

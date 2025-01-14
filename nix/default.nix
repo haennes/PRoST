@@ -7,7 +7,7 @@ in {
     services.nginx = {
       enable = true;
       virtualHosts."localhost".locations."/".root =
-        "${self.packages.x86_64-linux.frontend}";
+        "${cfg.frontend.package}";
     };
   };
 }
