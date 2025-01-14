@@ -6,7 +6,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.nginx = {
       enable = true;
-      virtualHosts."localhost".locations."/".root =
+      virtualHosts.${cfg.api_domain}.locations."/".root =
         "${cfg.frontend.package}";
     };
   };
